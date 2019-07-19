@@ -1,0 +1,25 @@
+{
+  "name": "dishdash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ABZhang0/dishdash.git"
+  },
+  "author": "abzhang0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ABZhang0/dishdash/issues"
+  },
+  "homepage": "https://github.com/ABZhang0/dishdash#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.6.5"
+  }
+}
