@@ -14,6 +14,12 @@ class App extends Component {
   onInputChange = (e) => {
     this.setState({ currentSearch: e.target.value });
   }
+
+  onSearchKey = (e) => {
+    if (e.key === "Enter") {
+      this.onSearchClick();
+    }
+  }
   
   onSearchClick = () => {
     if (this.state.currentSearch !== "") {
@@ -50,14 +56,28 @@ class App extends Component {
       </tr>
     )
 
+    let searchBarStyle = {};
+    let searchButtonStyle = {};
+    if (this.state.currentSearch !== "") {
+      searchBarStyle = {
+        marginLeft: '10px',
+        width: '250px',
+      };
+      searchButtonStyle = {
+        marginLeft: '10px',
+        backgroundColor: '#282c34',
+        color: "white",
+      };
+    }
+
     return (
       <div className="App">
         <div className="App-header">
           <h1 className="Title">dishdash</h1>
           <div className="Search">
-            <input className="Search-bar" placeholder="Look up a restaurant..." value={ this.state.currentSearch }
-              onChange={ this.onInputChange }/>
-            <button className="Search-button" onClick={ this.onSearchClick }>Search</button>
+            <input className="Search-bar" style={ searchBarStyle } placeholder="Look up a restaurant..." value={ this.state.currentSearch }
+              onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } spellCheck="false"/>
+            <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
           </div>
           <table className="Dishes">
             <tbody>

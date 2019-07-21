@@ -13,7 +13,55 @@
   color: white;
 }
 
+.Search {
+  margin-top: 20px;
+  transform: translate(0%, -50%);
+  background-color: white;
+  height: 50px;
+  border-radius: 50px;
+  padding: 10px;
+}
+
+.Search:hover > .Search-bar {
+  margin-left: 10px;
+  width: 250px;
+}
+
+.Search:hover > .Search-button {
+  margin-left: 10px;
+  background-color: #282c34;
+  color: white;
+}
+
+.Search-bar {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0px;
+  font-size: 20px;
+  transition: 0.4s;
+  line-height: 50px;
+  width: 0px;
+  font-weight: bold;
+}
+
+.Search-button {
+  float: right;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
 .Dishes {
+  margin-bottom: 50px;
   align-items: center;
   border-collapse: collapse;
 }
