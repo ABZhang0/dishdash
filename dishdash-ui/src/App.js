@@ -32,19 +32,38 @@ class App extends Component {
 
   render() {
     const dishes = Object.keys(this.state.restaurantDishes).map((dish) => {
-      return <li key={ dish }>{ dish } : { this.state.restaurantDishes[dish].overall_score }</li>
+      const dishRowKey = dish + '_row'
+      const dishScoreKey = dish + '_score';
+
+      return (
+        <tr key={ dishRowKey }>
+          <td key={ dish }>{ dish }</td>
+          <td key={ dishScoreKey }>{ this.state.restaurantDishes[dish].overall_score }</td>
+        </tr>
+      );
     })
+
+    if (dishes.length !== 0) dishes.unshift(
+      <tr key="Dishes-header">
+        <th>Dish Name</th>
+        <th>Overall Score</th>
+      </tr>
+    )
 
     return (
       <div className="App">
         <div className="App-header">
           <h1 className="Title">dishdash</h1>
-          <input className="Lookup" placeholder="Look up a restaurant..." value={ this.state.currentSearch }
-            onChange={ this.onInputChange }/>
-          <button className="Search" onClick={ this.onSearchClick }>Search</button>
-          <div className="Dishes">
-            { dishes }
+          <div className="Search">
+            <input className="Search-bar" placeholder="Look up a restaurant..." value={ this.state.currentSearch }
+              onChange={ this.onInputChange }/>
+            <button className="Search-button" onClick={ this.onSearchClick }>Search</button>
           </div>
+          <table className="Dishes">
+            <tbody>
+              { dishes }
+            </tbody>
+          </table>
         </div>
       </div>
     );
