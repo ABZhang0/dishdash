@@ -36,6 +36,10 @@ class App extends Component {
     }
   }
 
+  onBackClick = () => {
+    this.setState({ restaurantDishes: [] });
+  }
+
   render() {
     const dishes = Object.keys(this.state.restaurantDishes).map((dish) => {
       const dishRowKey = dish + '_row'
@@ -49,12 +53,18 @@ class App extends Component {
       );
     })
 
-    if (dishes.length !== 0) dishes.unshift(
-      <tr key="Dishes-header">
-        <th>Dish Name</th>
-        <th>Overall Score</th>
-      </tr>
-    )
+    let backButton = null;
+
+    if (dishes.length !== 0) {
+      dishes.unshift(
+        <tr key="Dishes-header">
+          <th>Dish Name</th>
+          <th>Overall Score</th>
+        </tr>
+      );
+
+      backButton = <button className="Back-button" onClick={ this.onBackClick }>Back</button>;
+    }
 
     let searchBarStyle = {};
     let searchButtonStyle = {};
@@ -84,6 +94,7 @@ class App extends Component {
               { dishes }
             </tbody>
           </table>
+          { backButton }
         </div>
       </div>
     );

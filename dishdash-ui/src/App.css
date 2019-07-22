@@ -70,3 +70,21 @@ th, td {
   border: 1px solid white;
   padding: 10px;
 }
+
+.Back-button {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.Back-button:hover {
+  font-size: 65%;
+}
