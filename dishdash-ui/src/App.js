@@ -84,7 +84,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h1 className="Title">dishdash</h1>
-          <div className="Search">
+          <div className="Search-container">
             <input className="Search-bar" style={ searchBarStyle } placeholder="Look up a restaurant..." value={ this.state.currentSearch }
               onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } spellCheck="false"/>
             <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
@@ -94,7 +94,9 @@ class App extends Component {
               { dishes }
             </tbody>
           </table>
-          { backButton }
+          <div className="Back-container">
+            { backButton }
+          </div>
         </div>
       </div>
     );

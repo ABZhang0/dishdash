@@ -13,7 +13,7 @@
   color: white;
 }
 
-.Search {
+.Search-container {
   margin-top: 20px;
   transform: translate(0%, -50%);
   background-color: white;
@@ -22,12 +22,12 @@
   padding: 10px;
 }
 
-.Search:hover > .Search-bar {
+.Search-container:hover > .Search-bar {
   margin-left: 10px;
   width: 250px;
 }
 
-.Search:hover > .Search-button {
+.Search-container:hover > .Search-button {
   margin-left: 10px;
   background-color: #282c34;
   color: white;
@@ -71,6 +71,11 @@ th, td {
   padding: 10px;
 }
 
+.Back-container {
+  margin-bottom: 50px;
+  padding: 10px;
+}
+
 .Back-button {
   height: 70px;
   width: 70px;
@@ -82,9 +87,9 @@ th, td {
   align-items: center;
   transition: 0.4s;
   cursor: pointer;
-  margin-bottom: 50px;
 }
 
 .Back-button:hover {
+  transform: scale(1.1);
   font-size: 65%;
 }
