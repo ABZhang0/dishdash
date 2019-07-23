@@ -13,6 +13,11 @@
   color: white;
 }
 
+.Title {
+  font-family: Cabin;
+  letter-spacing: 1px;
+}
+
 .Search-container {
   margin-top: 20px;
   transform: translate(0%, -50%);
