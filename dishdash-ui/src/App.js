@@ -42,26 +42,23 @@ class App extends Component {
 
   render() {
     const dishes = Object.keys(this.state.restaurantDishes).map((dish) => {
-      const dishRowKey = dish + '_row'
-      const dishScoreKey = dish + '_score';
-
       return (
-        <tr key={ dishRowKey }>
-          <td key={ dish }>{ dish }</td>
-          <td key={ dishScoreKey }>{ this.state.restaurantDishes[dish].overall_score }</td>
-        </tr>
+        <div className="Dish-card">
+          <p className="Dish-name">{ dish }</p>
+          <p className="Dish-score">{ this.state.restaurantDishes[dish].overall_score }</p>
+        </div>
       );
     })
 
     let backButton = null;
 
     if (dishes.length !== 0) {
-      dishes.unshift(
-        <tr key="Dishes-header">
-          <th>Dish Name</th>
-          <th>Overall Score</th>
-        </tr>
-      );
+      // dishes.unshift(
+      //   <tr key="Dishes-header">
+      //     <th>Dish Name</th>
+      //     <th>Overall Score</th>
+      //   </tr>
+      // );
 
       backButton = <button className="Back-button" onClick={ this.onBackClick }>Back</button>;
     }
@@ -89,11 +86,7 @@ class App extends Component {
               onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } spellCheck="false"/>
             <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
           </div>
-          <table className="Dishes">
-            <tbody>
-              { dishes }
-            </tbody>
-          </table>
+          { dishes }
           <div className="Back-container">
             { backButton }
           </div>
