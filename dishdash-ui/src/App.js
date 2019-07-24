@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import axios from 'axios';
 import './App.css';
 
@@ -8,6 +9,7 @@ class App extends Component {
     this.state = {
       restaurantDishes: [],
       currentSearch: "",
+      displayDishes: false,
     };
   }
 
@@ -28,6 +30,7 @@ class App extends Component {
         .then((response) => {
           console.log(response)
           this.setState({ restaurantDishes: response.data.recommendation.data });
+          this.setState({ displayDishes: true });
           this.setState({ currentSearch: "" });
         })
         .catch((error) => {
@@ -37,13 +40,17 @@ class App extends Component {
   }
 
   onBackClick = () => {
-    this.setState({ restaurantDishes: [] });
+    this.setState({ displayDishes: false });
+    
+    setTimeout(() => {
+      this.setState({ restaurantDishes: [] });
+    }, 500)
   }
 
   render() {
     const dishes = Object.keys(this.state.restaurantDishes).map((dish) => {
       return (
-        <div className="Dish-card">
+        <div className="Dish-card" key={ dish }>
           <p className="Dish-name">{ dish }</p>
           <p className="Dish-score">{ this.state.restaurantDishes[dish].overall_score }</p>
         </div>
@@ -86,7 +93,11 @@ class App extends Component {
               onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } spellCheck="false"/>
             <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
           </div>
-          { dishes }
+          <CSSTransition in={ this.state.displayDishes } timeout={ 500 } classNames="Dishes-transition">
+            <div>
+              { dishes }
+            </div>
+          </CSSTransition>
           <div className="Back-container">
             { backButton }
           </div>

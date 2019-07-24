@@ -67,10 +67,29 @@
 
 .Dish-card {
   width: 500px;
+  height: 85px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
-  padding: 24px;
+  padding: 24px 32px;
   margin-bottom: 10px;
   background-color: #505050;
+}
+
+.Dishes-transition-enter {
+  opacity: 0;
+}
+
+.Dishes-transition-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.Dishes-transition-exit {
+  opacity: 1;
+}
+
+.Dishes-transition-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
 }
 
 .Dish-name {
