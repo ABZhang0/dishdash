@@ -29,7 +29,10 @@ class App extends Component {
       axios.get(url)
         .then((response) => {
           console.log(response)
-          this.setState({ restaurantDishes: response.data.recommendation.data });
+          this.setState({ restaurantDishes: Object.entries(response.data.recommendation.data) });
+          this.state.restaurantDishes.sort((a, b) => {
+            return b[1].overall_score - a[1].overall_score;
+          });
           this.setState({ displayDishes: true });
           this.setState({ currentSearch: "" });
         })
@@ -48,11 +51,11 @@ class App extends Component {
   }
 
   render() {
-    const dishes = Object.keys(this.state.restaurantDishes).map((dish) => {
+    const dishes = (this.state.restaurantDishes).map((dish) => {
       return (
-        <div className="Dish-card" key={ dish }>
-          <p className="Dish-name">{ dish }</p>
-          <p className="Dish-score">{ this.state.restaurantDishes[dish].overall_score }</p>
+        <div className="Dish-card" key={ dish[0] }>
+          <p className="Dish-name">{ dish[0] }</p>
+          <p className="Dish-score">{ dish[1].overall_score }</p>
         </div>
       );
     })
@@ -60,13 +63,6 @@ class App extends Component {
     let backButton = null;
 
     if (dishes.length !== 0) {
-      // dishes.unshift(
-      //   <tr key="Dishes-header">
-      //     <th>Dish Name</th>
-      //     <th>Overall Score</th>
-      //   </tr>
-      // );
-
       backButton = <button className="Back-button" onClick={ this.onBackClick }>Back</button>;
     }
 
