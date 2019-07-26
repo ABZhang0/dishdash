@@ -66,10 +66,10 @@
 }
 
 .Dish-card {
-  min-width: 60vh;
+  min-width: 40vh;
   min-height: 10vh;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
-  padding: 24px 32px;
+  padding: 24px;
   margin-bottom: 10px;
   background-color: #505050;
 }
