@@ -25,7 +25,7 @@ class App extends Component {
   
   onSearchClick = () => {
     if (this.state.currentSearch !== "") {
-      const url = "http://localhost:3001/recommendation?restaurantName=" + this.state.currentSearch;
+      const url = process.env.REACT_APP_DISHDASH_API + "/recommendation?restaurantName=" + this.state.currentSearch;
       axios.get(url)
         .then((response) => {
           console.log(response)
