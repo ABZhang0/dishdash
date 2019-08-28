@@ -1,11 +1,15 @@
 var mongoose = require('mongoose');
 
 var RecommendationSchema = mongoose.Schema({
-  restaurant: {
+  name: {
     type: String,
     required: true,
   },
-  data: {
+  alias: {
+    type: String,
+    required: true,
+  },
+  dishes: {
     type: mongoose.Schema.Types.Mixed,
     required: true,
   },

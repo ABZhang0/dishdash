@@ -4,7 +4,7 @@ var router = express.Router();
 var Recommendation = require('../models/recommendation');
 
 router.get('/', function(req, res) {
-  Recommendation.findOne({ restaurant: req.query.restaurantName }, function(err, doc) {
+  Recommendation.findOne({ name: req.query.restaurantName }, function(err, doc) {
     res.send({ recommendation: doc });
   });
 });
