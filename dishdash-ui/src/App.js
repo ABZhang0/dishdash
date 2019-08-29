@@ -47,6 +47,7 @@ class App extends Component {
             return b[1].overall_score - a[1].overall_score;
           });
           this.setState({ displayDishes: true });
+          this.setState({ searchSuggestions: [] });
           this.setState({ currentSearch: "" });
         })
         .catch((error) => {
