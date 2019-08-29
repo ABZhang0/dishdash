@@ -16,6 +16,8 @@
 .Title {
   font-family: Cabin;
   letter-spacing: 1px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .Search-container {

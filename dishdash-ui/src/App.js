@@ -7,14 +7,27 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      restaurantNames: [],
       restaurantDishes: [],
       currentSearch: "",
+      searchSuggestions: [],
       displayDishes: false,
     };
   }
 
   onInputChange = (e) => {
     this.setState({ currentSearch: e.target.value });
+  
+    if (e.target.value !== "") {
+      const regex = new RegExp(`^${ e.target.value }`, "i");
+      this.setState({ searchSuggestions: this.state.restaurantNames.sort().filter(name => regex.test(name)) });
+    }
+  }
+
+  checkClearSuggestions = (e) => {
+    if (e.target.value === "") {
+      this.setState({ searchSuggestions: [] });
+    }
   }
 
   onSearchKey = (e) => {
@@ -25,7 +38,7 @@ class App extends Component {
   
   onSearchClick = () => {
     if (this.state.currentSearch !== "") {
-      const url = process.env.REACT_APP_DISHDASH_API + "/recommendation?restaurantName=" + this.state.currentSearch;
+      const url = process.env.REACT_APP_DISHDASH_API + "/recommendation?restaurantName=" + this.state.currentSearch.toLowerCase();
       axios.get(url)
         .then((response) => {
           console.log(response)
@@ -86,9 +99,10 @@ class App extends Component {
           <h1 className="Title">dishdash</h1>
           <div className="Search-container">
             <input className="Search-bar" style={ searchBarStyle } placeholder="Look up a restaurant..." value={ this.state.currentSearch }
-              onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } spellCheck="false"/>
+              onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } onKeyUp={ this.checkClearSuggestions } spellCheck="false"/>
             <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
           </div>
+          { this.state.searchSuggestions.map(item => <li>{ item }</li>) }
           <CSSTransition in={ this.state.displayDishes } timeout={ 500 } classNames="Dishes-transition">
             <div>
               { dishes }
@@ -100,6 +114,19 @@ class App extends Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    // fetch restaurant names for autocomplete
+    const url = process.env.REACT_APP_DISHDASH_API + "/restaurant/all";
+      axios.get(url)
+        .then((response) => {
+          console.log(response)
+          this.setState({ restaurantNames: response.data.restaurants[0].names });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
 }
 
