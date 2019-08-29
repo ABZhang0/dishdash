@@ -29,6 +29,40 @@
   padding: 10px;
 }
 
+.Search-container ul {
+  margin-top: 60px;
+  padding: 0px;
+  list-style-type: none;
+  text-align: left;
+  color: black;
+  font-size: 16px;
+  background-color: white;
+}
+
+.Search-container ul::before {
+  content: "";
+}
+
+.Search-container li {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.Search-container li:first-child {
+  border-top: 2px solid black;
+}
+
+.Search-container li:last-child {
+  border-bottom: 2px solid black;
+}
+
+.Search-container li:hover {
+  color: white;
+  background-color: grey;
+}
+
 .Search-container:hover > .Search-bar {
   margin-left: 10px;
   width: 250px;
@@ -68,7 +102,7 @@
 }
 
 .Dish-card {
-  min-width: 40vh;
+  min-width: 50vh;
   min-height: 10vh;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   padding: 24px;
@@ -96,6 +130,7 @@
 
 .Dish-name {
   float: left;
+  margin-right: 30px;
 }
 
 .Dish-score {

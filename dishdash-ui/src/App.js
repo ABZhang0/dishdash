@@ -20,7 +20,7 @@ class App extends Component {
   
     if (e.target.value !== "") {
       const regex = new RegExp(`^${ e.target.value }`, "i");
-      this.setState({ searchSuggestions: this.state.restaurantNames.sort().filter(name => regex.test(name)) });
+      this.setState({ searchSuggestions: this.state.restaurantNames.sort().filter(name => regex.test(name)).slice(0, 8) });
     }
   }
 
@@ -106,10 +106,10 @@ class App extends Component {
             <input className="Search-bar" style={ searchBarStyle } placeholder="Look up a restaurant..." value={ this.state.currentSearch }
               onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } onKeyUp={ this.checkClearSuggestions } spellCheck="false"/>
             <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
+            <ul>
+              { this.state.searchSuggestions.map(item => <li onClick={ () => { this.searchAutoFill(item) } }>{ item }</li>) }
+            </ul>
           </div>
-          <ul>
-            { this.state.searchSuggestions.map(item => <li onClick={ () => { this.searchAutoFill(item) } }>{ item }</li>) }
-          </ul>
           <CSSTransition in={ this.state.displayDishes } timeout={ 500 } classNames="Dishes-transition">
             <div>
               { dishes }
