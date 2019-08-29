@@ -154,6 +154,7 @@
   align-items: center;
   transition: 0.4s;
   cursor: pointer;
+  background-color: white;
 }
 
 .Back-button:hover {
