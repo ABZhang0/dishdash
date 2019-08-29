@@ -29,7 +29,7 @@ class App extends Component {
       axios.get(url)
         .then((response) => {
           console.log(response)
-          this.setState({ restaurantDishes: Object.entries(response.data.recommendation.data) });
+          this.setState({ restaurantDishes: Object.entries(response.data.recommendation.dishes) });
           this.state.restaurantDishes.sort((a, b) => {
             return b[1].overall_score - a[1].overall_score;
           });
