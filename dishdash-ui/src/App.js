@@ -30,6 +30,10 @@ class App extends Component {
     }
   }
 
+  searchAutoFill = (value) => {
+    this.setState({ currentSearch: value }, () => { this.onSearchClick() });
+  }
+
   onSearchKey = (e) => {
     if (e.key === "Enter") {
       this.onSearchClick();
@@ -44,7 +48,7 @@ class App extends Component {
           console.log(response)
           this.setState({ restaurantDishes: Object.entries(response.data.recommendation.dishes) });
           this.state.restaurantDishes.sort((a, b) => {
-            return b[1].overall_score - a[1].overall_score;
+            return b[1].overall_score - a[1].overall_score; // sort from highest to lowest overall score
           });
           this.setState({ displayDishes: true });
           this.setState({ searchSuggestions: [] });
@@ -103,7 +107,9 @@ class App extends Component {
               onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } onKeyUp={ this.checkClearSuggestions } spellCheck="false"/>
             <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
           </div>
-          { this.state.searchSuggestions.map(item => <li>{ item }</li>) }
+          <ul>
+            { this.state.searchSuggestions.map(item => <li onClick={ () => { this.searchAutoFill(item) } }>{ item }</li>) }
+          </ul>
           <CSSTransition in={ this.state.displayDishes } timeout={ 500 } classNames="Dishes-transition">
             <div>
               { dishes }
