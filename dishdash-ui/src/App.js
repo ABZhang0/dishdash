@@ -107,7 +107,7 @@ class App extends Component {
               onChange={ this.onInputChange } onKeyDown={ this.onSearchKey } onKeyUp={ this.checkClearSuggestions } spellCheck="false"/>
             <button className="Search-button" style={ searchButtonStyle } onClick={ this.onSearchClick }>Search</button>
             <ul>
-              { this.state.searchSuggestions.map(item => <li onClick={ () => { this.searchAutoFill(item) } }>{ item }</li>) }
+              { this.state.searchSuggestions.map((item, index) => <li key={ index } onClick={ () => { this.searchAutoFill(item) } }>{ item }</li>) }
             </ul>
           </div>
           <CSSTransition in={ this.state.displayDishes } timeout={ 500 } classNames="Dishes-transition">
