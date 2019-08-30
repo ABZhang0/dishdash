@@ -12,6 +12,7 @@ class App extends Component {
       currentSearch: "",
       searchSuggestions: [],
       displayDishes: false,
+      notFound: false,
     };
   }
 
@@ -46,13 +47,17 @@ class App extends Component {
       axios.get(url)
         .then((response) => {
           console.log(response)
-          this.setState({ restaurantDishes: Object.entries(response.data.recommendation.dishes) });
-          this.state.restaurantDishes.sort((a, b) => {
-            return b[1].overall_score - a[1].overall_score; // sort from highest to lowest overall score
-          });
-          this.setState({ displayDishes: true });
+          if (response.data.recommendation && response.data.recommendation.dishes) {
+            this.setState({ restaurantDishes: Object.entries(response.data.recommendation.dishes) });
+            this.state.restaurantDishes.sort((a, b) => {
+              return b[1].overall_score - a[1].overall_score; // sort from highest to lowest overall score
+            });
+            this.setState({ displayDishes: true });
+          } else {
+            this.setState({ notFound: true });
+          }
+
           this.setState({ searchSuggestions: [] });
-          this.setState({ currentSearch: "" });
         })
         .catch((error) => {
           console.error(error);
@@ -62,6 +67,8 @@ class App extends Component {
 
   onBackClick = () => {
     this.setState({ displayDishes: false });
+    this.setState({ notFound: false });
+    this.setState({ currentSearch: "" });
     
     setTimeout(() => {
       this.setState({ restaurantDishes: [] });
@@ -79,8 +86,9 @@ class App extends Component {
     })
 
     let backButton = null;
-
-    if (dishes.length !== 0) {
+    let notFoundMessage = null;
+    if (dishes.length !== 0 || this.state.notFound) { // animation works better than displayDishes
+      if (this.state.notFound) notFoundMessage = <p>Restaurant not found.</p>
       backButton = <button className="Back-button" onClick={ this.onBackClick }>Back</button>;
     }
 
@@ -122,6 +130,7 @@ class App extends Component {
               { dishes }
             </div>
           </CSSTransition>
+          { notFoundMessage }
           <div className="Back-container">
             { backButton }
           </div>
