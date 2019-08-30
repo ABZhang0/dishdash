@@ -52,6 +52,7 @@ class App extends Component {
             this.state.restaurantDishes.sort((a, b) => {
               return b[1].overall_score - a[1].overall_score; // sort from highest to lowest overall score
             });
+            this.setState({ notFound: false });
             this.setState({ displayDishes: true });
           } else {
             this.setState({ notFound: true });
@@ -144,7 +145,7 @@ class App extends Component {
     const url = process.env.REACT_APP_DISHDASH_API + "/restaurant/all";
       axios.get(url)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           this.setState({ restaurantNames: response.data.restaurants[0].names });
         })
         .catch((error) => {
