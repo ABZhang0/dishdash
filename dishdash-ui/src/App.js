@@ -32,7 +32,10 @@ class App extends Component {
   }
 
   searchAutoFill = (value) => {
-    this.setState({ currentSearch: value }, () => { this.onSearchClick() });
+    this.setState({
+      searchSuggestions: [],
+      currentSearch: value,
+    }, () => { this.onSearchClick() });
   }
 
   onSearchKey = (e) => {
@@ -52,13 +55,16 @@ class App extends Component {
             this.state.restaurantDishes.sort((a, b) => {
               return b[1].overall_score - a[1].overall_score; // sort from highest to lowest overall score
             });
-            this.setState({ notFound: false });
-            this.setState({ displayDishes: true });
+            this.setState({
+              notFound: false,
+              displayDishes: true,
+            });
           } else {
-            this.setState({ notFound: true });
-            this.setState({ displayDishes: false });
-
-            this.setState({ restaurantDishes: [] });
+            this.setState({
+              notFound: true,
+              displayDishes: false,
+              restaurantDishes: [],
+            });
           }
 
           this.setState({ searchSuggestions: [] });
@@ -70,9 +76,11 @@ class App extends Component {
   }
 
   onBackClick = () => {
-    this.setState({ displayDishes: false });
-    this.setState({ notFound: false });
-    this.setState({ currentSearch: "" });
+    this.setState({
+      displayDishes: false,
+      notFound: false,
+      currentSearch: "",
+    });
     
     setTimeout(() => {
       this.setState({ restaurantDishes: [] });
