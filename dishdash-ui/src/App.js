@@ -56,6 +56,9 @@ class App extends Component {
             this.setState({ displayDishes: true });
           } else {
             this.setState({ notFound: true });
+            this.setState({ displayDishes: false });
+
+            this.setState({ restaurantDishes: [] });
           }
 
           this.setState({ searchSuggestions: [] });
